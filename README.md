@@ -1,3 +1,7 @@
+# 说明
+$gitbook serve . 运行web服务
+
+
 # uCore OS实验指导书和源码网址 (2015)
 
 <div id="active-code">
