@@ -3,7 +3,7 @@ $gitbook serve . 运行web服务
 
 # md格式
 1. markdown的基本语法
-2. quizzes[https://github.com/chtq/blob/master/README.md]和rust-playpen的格式要求,具体例子请看md文件
+2. quizzes(https://github.com/chtq/blob/master/README.md)和rust-playpen的格式要求,具体例子请看md文件
 
 
 # uCore OS实验指导书和源码网址 (2015)
