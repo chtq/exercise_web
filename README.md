@@ -3,7 +3,7 @@ $gitbook serve . 运行web服务
 
 # md格式
 1. markdown的基本语法
-2. gitbook的插件[quizzes](https://github.com/chtq/gitbook-plugin-quizzes/blob/master/README.md)和[rust-playpen](https://github.com/chtq/gitbook-rust-playpen)的格式要求,具体例子请看md文件
+2.gitbook的插件[quizzes](https://github.com/chtq/gitbook-plugin-quizzes/blob/master/README.md)，[rust-playpen](https://github.com/chtq/gitbook-rust-playpen)用的是ace编辑框,两个plugin的具体使用例子请看md文件
 
 
 # uCore OS实验指导书和源码网址 (2015)
