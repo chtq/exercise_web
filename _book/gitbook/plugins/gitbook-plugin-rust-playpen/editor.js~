@@ -77,10 +77,12 @@ function initEditor() {
 		//var mydata = 'xz' + fname + '-' + name + ';;;' + answer;
 		//console.log(mydata);
 		var senddata={ "url":url,
+                               "protocol":window.location.protocol,
                                "allurl":window.location.host,
-			     "username":name,
-			     "email":email,
-			      "answer":editor.getValue()};
+			       "username":name,
+			       "email":email,
+			       "answer":editor.getValue()
+                             };
 		var ws = new WebSocket('ws://192.168.0.253:3368');
 		ws.onopen = function(){
 		  console.log("send");

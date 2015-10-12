@@ -3,11 +3,7 @@
         "path": "README.md",
         "title": "介绍" },
  "plugins": [
-<<<<<<< HEAD
      "quizzes","rust-playpen","grvis"
-=======
-      "quizzes","rust-playpen","grvis"
->>>>>>> ad1b428379cb419ee761b79d267d25bc28f09332
     ],
 
     "pluginsConfig": {

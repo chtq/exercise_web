@@ -88,7 +88,7 @@ function initEditor() {
 		  console.log("send");
 		  ws.send(JSON.stringify(senddata));
 		};
-		ws.onmessage = function(result){console.log(result.data);}
+		ws.onmessage = function(result){ resultDiv.innerHTML=result.data; }
 		ws.onclose=function(evt){console.log("close");};
 		ws.onerror=function(evt){console.log("error");};
 	   }

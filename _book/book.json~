@@ -3,19 +3,16 @@
         "path": "README.md",
         "title": "介绍" },
  "plugins": [
-     "-mathjax", "quizzes","rust-playpen","grvis","ga","duoshuo"
+<<<<<<< HEAD
+     "quizzes","rust-playpen","grvis"
+=======
+      "quizzes","rust-playpen","grvis"
+>>>>>>> ad1b428379cb419ee761b79d267d25bc28f09332
     ],
 
     "pluginsConfig": {
       "rust-playpen":{},
       "grvis":{},
-       "ga": {
-            "token": "UA-39088953-8"
-        },
-        "duoshuo": {
-            "short_name": "mytest",
-            "theme": "default"
-        },
        "quizees":{}
    }
 }
