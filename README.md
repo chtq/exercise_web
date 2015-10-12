@@ -1,6 +1,10 @@
 # 说明
 $gitbook serve . 运行web服务
 
+# md格式
+1. markdown的基本语法
+2. gitbook的插件[quizzes](https://github.com/chtq/gitbook-plugin-quizzes/blob/master/README.md)分开3部分题目、选项和注释，选择以-[x]开始，x代表是答案，注释以>开始，选项和注释之间一个空行；[rust-playpen](https://github.com/chtq/gitbook-rust-playpen)用的是ace编辑框,在md加入html标签即可，两个plugin的具体使用例子请看md文件
+
 
 # uCore OS实验指导书和源码网址 (2015)
 
