@@ -95,7 +95,7 @@ e_read()的参数传递和返回过程。提示：每处需要补全的代码只
     ...
     int
     read(int fd, void base, size_t len) {
-        ...(1)...
+        <input type="text" width="10" />
     }
     ...
     ---------------------------------
@@ -130,7 +130,7 @@ e_read()的参数传递和返回过程。提示：每处需要补全的代码只
     ...
     int
     sys_read(int fd, void base, size_t len) {
-             ...(2)...
+             <input type="text" width="10" />
     }
     ...
     ---------------------------------
@@ -187,7 +187,7 @@ e_read()的参数传递和返回过程。提示：每处需要补全的代码只
     trap_dispatch(struct trapframe tf) {
              char c;
              int ret;
-             switch (...(3)...) {
+             switch (<input type="text" width="10" />) {
              case T_DEBUG:
              case T_BRKPT:
                        debug_monitor(tf);
@@ -211,7 +211,7 @@ e_read()的参数传递和返回过程。提示：每处需要补全的代码只
                        }
                        break;
              case T_SYSCALL:
-                       ...(4)...
+                       <input type="text" width="10" />
                        break;
              case IRQ_OFFSET + IRQ_TIMER:
                        ticks ++;
@@ -254,7 +254,7 @@ e_read()的参数传递和返回过程。提示：每处需要补全的代码只
                        struct trapframe otf = current-&gt;tf;
                        current-&gt;tf = tf;
                        bool in_kernel = trap_in_kernel(tf);
-                       ...(5)...
+                       <input type="text" width="10" />
                        current-&gt;tf = otf;
                        if (!in_kernel) {
                                 if (current-&gt;flags &amp; PF_EXITING) {
@@ -274,8 +274,8 @@ e_read()的参数传递和返回过程。提示：每处需要补全的代码只
     static int
     sys_read(uint32_t arg[]) {
              int fd = (int)arg[0];
-             size_t len = (size_t)...(6)...;
-             void base = (void )...(7)...;
+             size_t len = (size_t)<input type="text" width="10" />;
+             void base = (void )<input type="text" width="10" />;
              ...(8a)...
     }
     ...
@@ -291,7 +291,7 @@ e_read()的参数传递和返回过程。提示：每处需要补全的代码只
     syscall(void) {
              struct trapframe tf = current-&gt;tf;
              uint32_t arg[5];
-             int num = tf-&gt;...(8b)...;
+             int num = tf-&gt;<input type="text" width="10" />;
              if (num &gt;= 0 &amp;&amp; num &lt; NUM_SYSCALLS) {
                        if (syscalls[num] != NULL) {
                                 arg[0] = tf-&gt;tf_regs.reg_edx;
@@ -299,7 +299,7 @@ e_read()的参数传递和返回过程。提示：每处需要补全的代码只
                                 arg[2] = tf-&gt;tf_regs.reg_ebx;
                                 arg[3] = tf-&gt;tf_regs.reg_edi;
                                 arg[4] = tf-&gt;tf_regs.reg_esi;
-                                tf-&gt;tf_regs.reg_eax = ...(9)...;
+                                tf-&gt;tf_regs.reg_eax = <input type="text" width="10" />;
                                 return ;
                        }
              }
@@ -332,7 +332,7 @@ e_read()的参数传递和返回过程。提示：每处需要补全的代码只
                        if ((alen = IOBUF_SIZE) &gt; len) {
                                 alen = len;
                        }
-                       ret = ...(10)...;
+                       ret = <input type="text" width="10" />;
                        if (alen != 0) {
                                 lock_mm(mm);
                                 {
