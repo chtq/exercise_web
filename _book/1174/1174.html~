@@ -5,7 +5,7 @@
         <!-- head:start -->
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>1169 | 说明</title>
+        <title>1174 | 说明</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="$gitbook serve . 运行web服务">
         <meta name="keywords" content="">
@@ -20,10 +20,10 @@
         
     
     
-    <link rel="next" href="./1170.html" />
+    <link rel="next" href="./1175.html" />
     
     
-    <link rel="prev" href="./1168.html" />
+    <link rel="prev" href="./1173.html" />
     
 
         <!-- head:end -->
@@ -48,7 +48,7 @@
     
 
         
-    <div class="book" data-level="7" data-basepath="." data-revision="1445410600918">
+    <div class="book" data-level="12" data-basepath="." data-revision="1445414755462">
     
 
 
@@ -60,11 +60,11 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_1">
+                    <section class="normal" id="section-gitbook_12">
                     
-                        <p>尝试用qemu+gdb（or ECLIPSE-CDT）调试lab1</p>
+                        <p>了解函数调用栈对lab实验有何帮助？ </p>
 <div class="active-code">
-<textarea rows="10" cols="80"></textarea>
+<textarea rows="10" cols="100"></textarea>
 <div><input class="action-submit" type="submit" value="提交"></input></div>
 </div>
 

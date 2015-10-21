@@ -64,8 +64,8 @@
                     
                         <p>尝试用qemu+gdb（or ECLIPSE-CDT）调试lab1</p>
 <div class="active-code">
-<textarea rows="10" cols="100"></textarea>
-<div><ipnut class="action-submit" type="submit" value="提交"></input></div>
+<textarea rows="10" cols="0"></textarea>
+<div><input class="action-submit" type="submit" value="提交"></input></div>
 </div>
 
                     
