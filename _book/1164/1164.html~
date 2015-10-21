@@ -5,7 +5,7 @@
         <!-- head:start -->
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>1167 | 说明</title>
+        <title>1164 | 说明</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="$gitbook serve . 运行web服务">
         <meta name="keywords" content="">
@@ -20,10 +20,10 @@
         
     
     
-    <link rel="next" href="./1168.html" />
+    <link rel="next" href="./1165.html" />
     
     
-    <link rel="prev" href="./1166.html" />
+    <link rel="prev" href="./1163.html" />
     
 
         <!-- head:end -->
@@ -48,7 +48,7 @@
     
 
         
-    <div class="book" data-level="5" data-basepath="." data-revision="1445410600918">
+    <div class="book" data-level="2" data-basepath="." data-revision="1445410600918">
     
 
 
@@ -60,12 +60,12 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_5">
+                    <section class="normal" id="section-gitbook_7">
                     
-                        <p>搭建好实验环境，请描述碰到的困难和解决的过程。</p>
+                        <p>虽然学过计算机原理和x86汇编（根据THU-CS的课程设置），但对ucore中涉及的哪些硬件设计或功能细节不够了解？</p>
 <div class="active-code">
 <textarea rows="10" cols="100"></textarea>
-<div><input class="action-submit" type="submit" value="提交"></input></div>
+<div><ipnut class="action-submit" type="submit" value="提交"></input></div>
 </div>
 
                     
