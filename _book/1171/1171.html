@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html lang="en-US" >
+    <!-- Start book 说明 -->
+    <head>
+        <!-- head:start -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
+        <title>1171 | 说明</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="$gitbook serve . 运行web服务">
+        <meta name="keywords" content="">
+        <meta name="generator" content="GitBook 1.5.0">
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+        
+        
+    
+    
+    <link rel="next" href="./1172.html" />
+    
+    
+    <link rel="prev" href="./1170.html" />
+    
+
+        <!-- head:end -->
+    </head>
+    <body>
+        <!-- body:start -->
+        
+    <link rel="stylesheet" href="gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-quizzes/quizzes.css">
+        
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-rust-playpen/editor.css">
+        
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-grvis/test.css">
+        
+    
+    
+
+        
+    <div class="book" data-level="9" data-basepath="." data-revision="1445410600918">
+    
+
+
+
+    <div class="book-body">
+        
+
+            <div class="page-wrapper" tabindex="-1">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-gitbook_9">
+                    
+                        <p>对于如下的代码段，</p>
+<pre class="sh_c"><code>#define SETGATE(gate, istrap, sel, off, dpl) {            \
+    (gate).gd_off_15_0 = (uint32_t)(off) &amp; 0xffff;        \
+    (gate).gd_ss = (sel);                                \
+    (gate).gd_args = 0;                                    \
+    (gate).gd_rsv1 = 0;                                    \
+    (gate).gd_type = (istrap) ? STS_TG32 : STS_IG32;    \
+    (gate).gd_s = 0;                                    \
+    (gate).gd_dpl = (dpl);                                \
+    (gate).gd_p = 1;                                    \
+    (gate).gd_off_31_16 = (uint32_t)(off) &gt;&gt; 16;        \
+}
+</code></pre><p>如果在其他代码段中有如下语句，</p>
+<pre><code>unsigned intr;
+intr=8;
+SETGATE(intr, 0,1,2,3);
+</code></pre><p>请问执行上述指令后， intr的值是<input type="text" width="10">？</p>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        
+        
+        
+        
+        
+    </div>
+</div>
+
+        
+<script src="gitbook/app.js"></script>
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-quizzes/quizzes.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-rust-playpen/ace/ace.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-rust-playpen/editor.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-rust-playpen/mode-rust.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-grvis/test.js"></script>
+    
+
+    
+    <script src="https://cdn.mathjax.org/mathjax/2.4-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"fontSettings":{"theme":null,"family":"sans","size":2},"rust-playpen":{},"grvis":{},"quizees":{}};
+    gitbook.start(config);
+});
+</script>
+
+        <!-- body:end -->
+    </body>
+    <!-- End of book 说明 -->
+</html>
