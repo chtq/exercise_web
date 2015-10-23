@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html lang="en-US" >
+    <!-- Start book 说明 -->
+    <head>
+        <!-- head:start -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
+        <title>wd1339 | 说明</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="$gitbook serve . 运行web服务">
+        <meta name="keywords" content="">
+        <meta name="generator" content="GitBook 1.5.0">
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+        
+    
+    
+    <link rel="next" href="../wd1329/1329.html" />
+    
+    
+    <link rel="prev" href="../wd1315/1315.html" />
+    
+
+        <!-- head:end -->
+    </head>
+    <body>
+        <!-- body:start -->
+        
+    <link rel="stylesheet" href="../gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-quizzes/quizzes.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-rust-playpen/editor.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-grvis/test.css">
+        
+    
+    
+
+        
+    <div class="book" data-level="78" data-basepath=".." data-revision="1445568760808">
+    
+
+
+
+    <div class="book-body">
+        
+
+            <div class="page-wrapper" tabindex="-1">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-gitbook_58">
+                    
+                        <p>(spoc) 有一台假想的计算机，页大小（page size）为32 Bytes，支持8KB的虚拟地址空间（virtual address space）,有4KB的物理内存空间（physical memory），采用二级页表，一个页目录项（page directory entry ，PDE）大小为1 Byte,一个页表项（page-table entries PTEs）大小为1 Byte，1个页目录表大小为32 Bytes，1个页表大小为32 Bytes。页目录基址寄存器（page directory base register，PDBR）保存了页目录表的物理地址（按页对齐）。</p>
+<p>PTE格式（8 bit） :</p>
+<pre class="sh_c"><code>  VALID | PFN6 ... PFN0
+</code></pre><p>PDE格式（8 bit） :</p>
+<pre class="sh_c"><code>  VALID | PT6 ... PT0
+</code></pre><p>其</p>
+<pre class="sh_c"><code>VALID==1表示，表示映射存在；VALID==0表示，表示内存映射不存在（有两种情况：a.对应的物理页帧swap out在硬盘上；b.既没有在内存中，页没有在硬盘上，这时页帧号为0x7F）。
+PFN6..0:页帧号或外存中的后备页号
+PT6..0:页表的物理基址&gt;&gt;5
+</code></pre><p>已经建立好了1个页目录表和8个页表，且页目录表的index为0~7的页目录项分别对应了这8个页表。</p>
+<p>在物理内存模拟数据文件中，给出了4KB物理内存空间和4KBdisk空间的值，PDBR的值。</p>
+<p>请回答下列虚地址是否有合法对应的物理内存，请给出对应的pde index, pde contents, pte index, pte contents，the value of addr in phy page OR disk sector。</p>
+<pre class="sh_c"><code>Virtual Address 6653:
+Virtual Address 1c13:
+Virtual Address 6890:
+Virtual Address 0af6:
+Virtual Address 1e6f:
+</code></pre><p>提示:
+页大小（page size）为32 Bytes(2^5)
+页表项1B</p>
+<p>8KB的虚拟地址空间(2^13)
+一级页表：2^5
+PDBR content: 0xd80（1101_100 0_0000, page 0x6c）</p>
+<p>page 6c: e1(1110 0001) b5(1011 0101) a1(1010 0001) c1(1100 0001)
+         b3(1011 0011) e4(1110 0100) a6(1010 0110) bd(1011 1101)
+二级页表：2^5
+页内偏移：2^5</p>
+<p>4KB的物理内存空间（physical memory）(2^12)
+物理帧号：2^7</p>
+<pre class="sh_c"><code>Virtual Address 0330(0 00000 11001 1_0000):
+  --&gt; pde index:0x0(00000)  pde contents:(0xe1, 11100001, valid 1, pfn 0x61(page 0x61))
+  page 6c: e1 b5 a1 c1 b3 e4 a6 bd 7f 7f 7f 7f 7f 7f 7f 7f
+           7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f
+  page 61: 7c 7f 7f 4e 4a 7f 3b 5a 2a be 7f 6d 7f 66 7f a7
+           69 96 7f c8 3a 7f a5 83 07 e3 7f 37 62 30 7f 3f 
+    --&gt; pte index:0x19(11001)  pte contents:(0xe3, 1 110_0011, valid 1, pfn 0x63)
+  page 63: 16 00 0d 15 00 1c 1d 16 02 02 0b 00 0a 00 1e 19
+           02 1b 06 06 14 1d 03 00 0b 00 12 1a 05 03 0a 1d
+      --&gt; To Physical Address 0xc70(110001110000, 0xc70) --&gt; Value: 02
+
+Virtual Address 1e6f(0 001_11 10_011 0_1111):
+  --&gt; pde index:0x7(00111)  pde contents:(0xbd, 10111101, valid 1, pfn 0x3d)
+  page 6c: e1 b5 a1 c1 b3 e4 a6 bd 7f 7f 7f 7f 7f 7f 7f 7f
+           7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f 7f
+  page 3d: f6 7f 5d 4d 7f 04 29 7f 1e 7f ef 51 0c 1c 7f 7f
+           7f 76 d1 16 7f 17 ab 55 9a 65 ba 7f 7f 0b 7f 7f 
+   --&gt; pte index:0x13  pte contents:(0x16, valid 0, pfn 0x16)
+  disk 16: 00 0a 15 1a 03 00 09 13 1c 0a 18 03 13 07 17 1c 
+           0d 15 0a 1a 0c 12 1e 11 0e 02 1d 10 15 14 07 13
+      --&gt; To Disk Sector Address 0x2cf(0001011001111) --&gt; Value: 1c
+</code></pre><div class="active-code">
+<textarea rows="10" cols="80"></textarea>
+<div><input class="action-submit" type="submit" value="提交"/></div>
+</div>
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        
+        
+        
+        
+        
+    </div>
+</div>
+
+        
+<script src="../gitbook/app.js"></script>
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-quizzes/quizzes.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-rust-playpen/ace/ace.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-rust-playpen/editor.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-rust-playpen/mode-rust.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-grvis/test.js"></script>
+    
+
+    
+    <script src="https://cdn.mathjax.org/mathjax/2.4-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"fontSettings":{"theme":null,"family":"sans","size":2},"rust-playpen":{},"grvis":{},"quizees":{}};
+    gitbook.start(config);
+});
+</script>
+
+        <!-- body:end -->
+    </body>
+    <!-- End of book 说明 -->
+</html>
