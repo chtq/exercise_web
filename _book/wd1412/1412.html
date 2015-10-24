@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html lang="en-US" >
+    <!-- Start book 说明 -->
+    <head>
+        <!-- head:start -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
+        <title>wd1412 | 说明</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="$gitbook serve . 运行web服务">
+        <meta name="keywords" content="">
+        <meta name="generator" content="GitBook 1.5.0">
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+        
+    
+    
+    <link rel="next" href="../wd1421/1421.html" />
+    
+    
+    <link rel="prev" href="../wd1425/1425.html" />
+    
+
+        <!-- head:end -->
+    </head>
+    <body>
+        <!-- body:start -->
+        
+    <link rel="stylesheet" href="../gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-quizzes/quizzes.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-rust-playpen/editor.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-grvis/test.css">
+        
+    
+    
+
+        
+    <div class="book" data-level="75" data-basepath=".." data-revision="1445659126981">
+    
+
+
+
+    <div class="book-body">
+        
+
+            <div class="page-wrapper" tabindex="-1">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-gitbook_150">
+                    
+                        <p>(spoc)设计一个简化的进程管理子系统，可以管理并调度如下简化进程.给出了<a href="&quot;https://github.com/chyyuu/ucore_lab/blob/master/related_info/lab4/process-concept-homework.py">参考代码</a>，请理解代码，并完成＂YOUR CODE&quot;部分的内容．　可２个人一组</p>
+<h2 id="">进程的状态</h2>
+<pre class="sh_c"><code>    RUNNING - 进程正在使用CPU
+    READY - 进程可使用CPU
+    DONE - 进程结束
+</code></pre><h2 id="">进程的行为</h2>
+<pre class="sh_c"><code>    使用CPU,
+    发出YIELD请求,放弃使用CPU
+</code></pre><h2 id="">进程调度</h2>
+<pre class="sh_c"><code>    使用FIFO/FCFS：先来先服务,
+        先查找位于proc_info队列的curr_proc元素(当前进程)之后的进程(curr_proc+1..end)是否处于READY态，
+        再查找位于proc_info队列的curr_proc元素(当前进程)之前的进程(begin..curr_proc-1)是否处于READY态
+        如都没有，继续执行curr_proc直到结束
+</code></pre><h2 id="">关键模拟变量</h2>
+<pre class="sh_c"><code>    进程控制块
+    PROC_CODE = &#39;code_&#39;
+    PROC_PC = &#39;pc_&#39;
+    PROC_ID = &#39;pid_&#39;
+    PROC_STATE = &#39;proc_state_&#39;
+</code></pre><ul>
+<li>当前进程 curr_proc</li>
+<li>进程列表：proc_info是就绪进程的队列（list），</li>
+<li>在命令行（如下所示）需要说明每进程的行为特征：（１）使用CPU ;(2)等待I/O<pre class="sh_c"><code>-l PROCESS_LIST, --processlist= X1:Y1,X2:Y2,...
+X 是进程的执行指令数; 
+Ｙ是执行CPU的比例(0..100) ，如果是100，表示不会发出yield操作
+</code></pre>进程切换行为：系统决定何时(when)切换进程:进程结束或进程发出yield请求</li>
+</ul>
+<h2 id="">进程执行</h2>
+<pre class="sh_c"><code>instruction_to_execute = self.proc_info[self.curr_proc][PROC_CODE].pop(0)
+</code></pre><h2 id="">关键函数</h2>
+<pre class="sh_c"><code>    系统执行过程：run
+    执行状态切换函数:　move_to_ready/running/done　
+    调度函数：next_proc
+</code></pre><h2 id="">执行实例</h2>
+<p>例１</p>
+<pre class="sh_c"><code>$./process-simulation.py -l 5:50
+Process 0
+  yld
+  yld
+  cpu
+  cpu
+  yld
+
+Important behaviors:
+  System will switch when the current process is FINISHED or ISSUES AN YIELD
+Time     PID: 0 
+  1     RUN:yld 
+  2     RUN:yld 
+  3     RUN:cpu 
+  4     RUN:cpu 
+  5     RUN:yld
+</code></pre><p>例２</p>
+<pre class="sh_c"><code>$./process-simulation.py  -l 5:50,5:50
+Produce a trace of what would happen when you run these processes:
+Process 0
+  yld
+  yld
+  cpu
+  cpu
+  yld
+
+Process 1
+  cpu
+  yld
+  cpu
+  cpu
+  yld
+
+Important behaviors:
+  System will switch when the current process is FINISHED or ISSUES AN YIELD
+Time     PID: 0     PID: 1 
+  1     RUN:yld      READY 
+  2       READY    RUN:cpu 
+  3       READY    RUN:yld 
+  4     RUN:yld      READY 
+  5       READY    RUN:cpu 
+  6       READY    RUN:cpu 
+  7       READY    RUN:yld 
+  8     RUN:cpu      READY 
+  9     RUN:cpu      READY 
+ 10     RUN:yld      READY 
+ 11     RUNNING       DONE
+</code></pre><div class="active-code">
+<textarea rows="10" cols="80"></textarea>
+<div><input class="action-submit" type="submit" value="提交"/></div>
+</div>
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        
+        
+        
+        
+        
+    </div>
+</div>
+
+        
+<script src="../gitbook/app.js"></script>
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-quizzes/quizzes.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-rust-playpen/ace/ace.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-rust-playpen/editor.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-rust-playpen/mode-rust.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-grvis/test.js"></script>
+    
+
+    
+    <script src="https://cdn.mathjax.org/mathjax/2.4-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"fontSettings":{"theme":null,"family":"sans","size":2},"rust-playpen":{},"grvis":{},"quizees":{}};
+    gitbook.start(config);
+});
+</script>
+
+        <!-- body:end -->
+    </body>
+    <!-- End of book 说明 -->
+</html>
